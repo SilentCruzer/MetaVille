@@ -2,8 +2,10 @@ import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_conditional_rendering/conditional.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'dart:convert';
 
 class EventsTimeline extends StatefulWidget{
   @override
@@ -11,8 +13,10 @@ class EventsTimeline extends StatefulWidget{
 }
 
 class EventsTimelineScreen extends State<EventsTimeline>{
+  List data;
   DateTime now = DateTime.now();
   DateTime pickedDate = DateTime.now();
+  String dateText;
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -70,6 +74,7 @@ class EventsTimelineScreen extends State<EventsTimeline>{
                         // New date selected
                         setState(() {
                           pickedDate = date;
+                          dateText = DateFormat('dd-MM-yyyy').format(pickedDate).toString();
                         });
                       },
                     ),
@@ -77,9 +82,20 @@ class EventsTimelineScreen extends State<EventsTimeline>{
                   ],
                 ),
               ),
-              _buildEventCard(from: '6:00 pm', to: '7:00 pm', Title: "Weekly Meeting", location: "Community hall"),
-              _buildEventCard(from: '7:30 pm', to: '8:00 pm', Title: "Book club meeting", location: "Apt 13, floor 3"),
-              _buildEventCard(from: '8:30 pm', to: '9:00 pm', Title: "Covid-19 safety meeting", location: "Lobby")
+              FutureBuilder(
+                future: DefaultAssetBundle.of(context)
+                    .load('lib/screens/events.json'),
+                builder: (context, snapshot){
+                  var newData = json.decode(jsonData);
+                  print(data);
+                  return Conditional.single(
+                      context: context,
+                      conditionBuilder: (BuildContext context) => newData[dateText] != null,
+                      widgetBuilder: (BuildContext context) => conditionalList(newData),
+                      fallbackBuilder: (BuildContext context) => conditionalNull()
+                  );
+                },
+              ),
             ],
           ),
         ),
@@ -127,7 +143,7 @@ class EventsTimelineScreen extends State<EventsTimeline>{
                     children: [
                       SizedBox(height: 5,),
                       Container(
-                        height: 15,
+                        height: 16,
                         child: Row(
                           children: [
                             Text(from + " - "+ to),
@@ -153,4 +169,35 @@ class EventsTimelineScreen extends State<EventsTimeline>{
       )
     );
   }
+  Widget conditionalList(dynamic newData){
+    return Container(
+      height: 1000,
+      child: ListView.builder(itemCount: newData[dateText].length,itemBuilder: (BuildContext context, int index){
+        return _buildEventCard(
+            from: newData[dateText][index]["from"],
+            to: newData[dateText][index]["to"],
+            Title: newData[dateText][index]["title"],
+            location: newData[dateText][index]["location"]
+        );
+      })
+      ,);
+  }
+  Widget conditionalNull(){
+    return Center(
+      child:Padding(
+        padding: EdgeInsets.only(top: 50),
+        child: Text("You have no events on this day",
+        style: TextStyle(
+          fontSize: 16,
+        ),),
+      )
+    );
+  }
+  String jsonData = '{"01-08-2021":[{"from":"6:00pm","to":"7:00pm","location":"Community hall","title":"Party planning meeting"},'
+      '{"from":"7:30pm","to":"8:00pm","location":"Apt 13, floor 3","title":"Book club meeting"},'
+      '{"from":"8:30pm","to":"9:00pm","location":"Community hall","title":"Covid-19 safety meeting"}],'
+      '"02-08-2021":[{"from":"8:00pm","to":"7:00pm","location":"Apt 20, floor 4","title":"Birthday Party"},'
+      '{"from":"9:30pm","to":"8:00pm","location":"Apt 13, floor 3","title":"Weekly meeting"}],'
+      '"03-08-2021":[{"from":"8:00pm","to":"7:00pm","location":"Apt 20, floor 4","title":"Current Events"},'
+      '{"from":"9:30pm","to":"8:00pm","location":"Apt 13, floor 3","title":"Arts club meeting"}]}';
 }

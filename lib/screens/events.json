@@ -1,0 +1,44 @@
+{
+  "01-08-2021": [{
+    "from": "6:00pm",
+    "to": "7:00pm",
+    "location": "Community hall",
+    "title": "Party planning meeting"
+  },{
+    "from": "7:30pm",
+    "to": "8:00pm",
+    "location": "Apt 13, floor 3",
+    "title": "Book club meeting"
+  },
+    {
+      "from": "8:30pm",
+      "to": "9:00pm",
+      "location": "Community hall",
+      "title": "Covid-19 safety meeting"
+    }
+  ],
+  "02-08-2021": [{
+    "from": "8:00pm",
+    "to": "7:00pm",
+    "location": "Apt 20, floor 4",
+    "title": "Birthday Party"
+  },{
+    "from": "9:30pm",
+    "to": "8:00pm",
+    "location": "Apt 13, floor 3",
+    "title": "Weekly meeting"
+  }
+  ],
+  "04-08-2021": [{
+    "from": "8:00pm",
+    "to": "7:00pm",
+    "location": "Apt 20, floor 4",
+    "title": "Birthday Party"
+  },{
+    "from": "9:30pm",
+    "to": "8:00pm",
+    "location": "Apt 13, floor 3",
+    "title": "Weekly meeting"
+  }
+  ]
+}
