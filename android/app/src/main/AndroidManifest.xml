@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.metaville2">
    <application
-        android:label="metaville2"
+        android:label="MetaVille"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
