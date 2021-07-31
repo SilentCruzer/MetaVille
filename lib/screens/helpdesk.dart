@@ -38,11 +38,8 @@ class _ProfilePageState extends State<HelpDesk> {
                   ),
                 ),
                 AvatarImage(),
-                SizedBox(
-                  height: 30,
-                ),
                 SocialIcons(),
-                SizedBox(height: 30),
+                SizedBox(height: 40),
                 Text(
                   'Help Desk',
                   style: TextStyle(
@@ -103,17 +100,16 @@ class AvatarImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 160,
-      height: 160,
-      padding: EdgeInsets.all(0),
+      width: 200,
+      height: 200,
       child: Container(
         decoration: avatarDecoration,
-        padding: EdgeInsets.all(5),
+        padding: EdgeInsets.all(0),
         child: Container(
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             image: DecorationImage(
-              image: AssetImage('images/mitsubishi.png'),
+              image: AssetImage('images/help.png'),
             ),
           ),
         ),
