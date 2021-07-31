@@ -10,6 +10,7 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:metaville2/screens/memberships.dart';
 import 'package:metaville2/screens/helpdesk.dart';
+import 'package:metaville2/screens/list2.dart';
 
 class DashBoard extends StatefulWidget {
   @override
@@ -208,6 +209,19 @@ class DashboardScreen extends State<DashBoard> {
                                               EventsTimeline()),
                                     )),
                                 _buildItemCard(
+                                    title: "My Society",
+                                    total: "Available: 6",
+                                    used: "Member: 2",
+                                    totalNum: 6,
+                                    usedNum: 2,
+                                    color: Colors.indigo,
+                                    icon: FontAwesomeIcons.userFriends,
+                                    onTap: () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => SchoolList()),
+                                    )),
+                                _buildItemCard(
                                     title: "Complaints",
                                     total: "Unresolved: 4",
                                     used: "Resolved: 3",
@@ -239,7 +253,7 @@ class DashboardScreen extends State<DashBoard> {
                                     used: "",
                                     totalNum: 1,
                                     usedNum: 1,
-                                    color: Colors.indigo,
+                                    color: Colors.deepPurple,
                                     icon: FontAwesomeIcons.handsHelping,
                                     onTap: () => Navigator.push(
                                       context,
