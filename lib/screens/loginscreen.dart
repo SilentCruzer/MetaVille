@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'dart:async';
 
+import 'package:metaville2/screens/dashboard.dart';
+
 class Login extends StatefulWidget {
   var photos = ['images/building.png','images/family.png'];
 
@@ -148,7 +150,7 @@ class _LoginState extends State<Login> {
                     width: double.infinity,
                     child: ElevatedButton(onPressed: (){Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Login()),
+                      MaterialPageRoute(builder: (context) => DashBoard()),
                     );},
                       child: Text('Login'),
                       style: ButtonStyle(
